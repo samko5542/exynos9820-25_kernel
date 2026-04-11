@@ -573,12 +573,7 @@ def make_config(features, configs, model):
     del os.environ['KCONFIG_CONFIG']
 
 def update_magisk(version):
-    cmd = ['usr/magisk/update_magisk.sh']
-    if version:
-        cmd.append(version)
-    run(cmd, check=True)
-    with open('usr/magisk/magisk_version', 'r') as fh:
-        print('Magisk Version: ' + fh.readline())
+   print("magiskshit")
 
 def switch_toolchain(compiler):
     cc = os.path.abspath(get_toolchain_cc(compiler))
