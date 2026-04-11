@@ -1205,7 +1205,7 @@ if __name__ == '__main__':
             os.utime(model_config)
             os.symlink('config.' + model, kernel_config)
 
-            if features['magisk'] and not magisk_already_updated:
+            if False:
                 update_magisk(configs['kernel']['magisk'].get('version'))
                 magisk_already_updated = True
 
