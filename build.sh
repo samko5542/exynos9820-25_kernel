@@ -4,7 +4,7 @@ DATE=$(TZ=GMT-8 date +"%Y%m%d-%H%M")
 
 MODEL="s10e"
 
-DEVICE="beyond0lte"
+DEVICE="beyond0"
 
 NAME="sploitpay-v1"
 
