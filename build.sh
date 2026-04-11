@@ -2,9 +2,9 @@
 
 DATE=$(TZ=GMT-8 date +"%Y%m%d-%H%M")
 
-MODEL="Samsung galaxy Note 10 plus"
+MODEL="s10e"
 
-DEVICE="d2s"
+DEVICE="beyond0lte"
 
 NAME="sploitpay-v1"
 
