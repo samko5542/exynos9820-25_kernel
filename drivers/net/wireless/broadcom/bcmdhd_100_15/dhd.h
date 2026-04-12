@@ -3237,7 +3237,7 @@ int dhd_get_debug_dump_file_name(void *dev, dhd_pub_t *dhdp,
 #if defined(BCMPCIE)
 uint32 dhd_get_ext_trap_len(void *ndev, dhd_pub_t *dhdp);
 #endif /* BCMPCIE */
-uint32 dhd_get_time_str_len(void);
+uint32 dhd_get_time_str_len();
 uint32 dhd_get_health_chk_len(void *ndev, dhd_pub_t *dhdp);
 uint32 dhd_get_dhd_dump_len(void *ndev, dhd_pub_t *dhdp);
 uint32 dhd_get_cookie_log_len(void *ndev, dhd_pub_t *dhdp);
