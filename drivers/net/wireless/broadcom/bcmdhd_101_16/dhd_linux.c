@@ -19211,7 +19211,7 @@ dhd_nla_put_sssr_dump_len(void *ndev, uint32 *arr_len)
 #endif /* DHD_SSSR_DUMP */
 
 uint32
-dhd_get_time_str_len()
+dhd_get_time_str_len(void)
 {
 	char *ts = NULL, time_str[128];
 
@@ -19562,7 +19562,7 @@ dhd_print_time_str(const void *user_buf, void *fp, uint32 len, void *pos)
 			"\n\n ========== LOG DUMP TAKEN AT : %s =========\n", ts);
 
 	if (!fp) {
-		uint32 length = dhd_get_time_str_len();
+		uint32 length = dhd_get_time_str_len(void);
 		CHK_BUF_ENOUGH_AND_UPDATE_LEN(__FUNCTION__, length, len, *(int*)pos, ret);
 	}
 
