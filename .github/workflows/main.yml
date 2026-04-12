@@ -8,13 +8,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - name: env setup
-        run: sudo apt-get update --fix-missing && sudo apt-get install bc bison build-essential zstd clang flex gnupg gperf ccache liblz4-tool libncurses5-dev libsdl1.2-dev libstdc++6 libxml2 libxml2-utils lzop pngcrush schedtool squashfs-tools xsltproc zlib1g-dev libncurses5-dev bzip2 git gcc g++ libssl-dev openssl python3 -y && sudo apt-get install gcc-aarch64-linux-gnu && sudo apt-get install gcc-arm-linux-gnueabihf&& sudo apt-get install lld&& sudo apt-get install gcc-arm-linux-gnueabi
-        
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            bc bison build-essential flex git \
+            libssl-dev libncurses-dev \
+            zstd clang lld llvm \
+            python3 ccache \
+            gcc-aarch64-linux-gnu gcc-arm-linux-gnueabi gcc-arm-linux-gnueabihf
+
+      - name: Fix broken kernel config (important)
+        run: |
+          echo "Fixing stack protector for older clang builds..."
+          sed -i 's/CONFIG_CC_STACKPROTECTOR_STRONG=y/CONFIG_CC_STACKPROTECTOR=y/' config.G970F || true
+
       - name: build
         env:
           token: ${{ secrets.TOKEN }}
-        run: chmod +x build.sh && ./build.sh "${token}"
-
+          CC: clang
+          LLVM: 1
+          LLVM_IAS: 1
+        run: |
+          chmod +x build.sh
+          ./build.sh "${token}"
