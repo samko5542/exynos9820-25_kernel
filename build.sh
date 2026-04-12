@@ -1,5 +1,14 @@
 #! /bin/bash
 
+
+export KCFLAGS="-Wno-error=implicit-function-declaration"
+export KBUILD_CFLAGS="-Wno-error=implicit-function-declaration"
+unset CFLAGS
+unset CPPFLAGS
+unset LDFLAGS
+
+
+
 DATE=$(TZ=GMT-8 date +"%Y%m%d-%H%M")
 
 MODEL="s10e"
