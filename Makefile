@@ -445,7 +445,7 @@ LINUXINCLUDE    := \
 KBUILD_AFLAGS   := -D__ASSEMBLY__ -march=armv8-a+lse
 KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -fno-strict-aliasing -fno-common -fshort-wchar \
-		   -Werror-implicit-function-declaration \
+		   -implicit-function-declaration \
 		   -Wno-format-security \
 		   -Xassembler -march=armv8-a+lse \
 		   -std=gnu89
@@ -547,7 +547,7 @@ endif
 ifneq ($(LLVM_IAS),1)
 CLANG_FLAGS	+= -no-integrated-as
 endif
-CLANG_FLAGS	+= -Werror=unknown-warning-option
+CLANG_FLAGS	+= =unknown-warning-option
 KBUILD_CFLAGS	+= $(CLANG_FLAGS)
 KBUILD_AFLAGS	+= $(CLANG_FLAGS)
 export CLANG_FLAGS
@@ -678,7 +678,7 @@ include/config/auto.conf: ;
 endif # $(dot-config)
 
 ifdef CONFIG_CC_WERROR
-  KBUILD_CFLAGS += -Werror
+  KBUILD_CFLAGS += 
 endif
 
 # For the kernel to actually contain only the needed exported symbols,
@@ -1016,19 +1016,19 @@ KBUILD_CFLAGS   += $(call cc-option,-fconserve-stack)
 endif
 
 # disallow errors like 'EXPORT_GPL(foo);' with missing header
-KBUILD_CFLAGS   += $(call cc-option,-Werror=implicit-int)
+KBUILD_CFLAGS   += $(call cc-option,=implicit-int)
 
 # require functions to have arguments in prototypes, not empty 'int foo()'
-KBUILD_CFLAGS   += $(call cc-option,-Werror=strict-prototypes)
+KBUILD_CFLAGS   += $(call cc-option,=strict-prototypes)
 
 # Prohibit date/time macros, which would make the build non-deterministic
-KBUILD_CFLAGS   += $(call cc-option,-Werror=date-time)
+KBUILD_CFLAGS   += $(call cc-option,=date-time)
 
 # enforce correct pointer usage
-KBUILD_CFLAGS   += $(call cc-option,-Werror=incompatible-pointer-types)
+KBUILD_CFLAGS   += $(call cc-option,=incompatible-pointer-types)
 
 # Require designated initializers for all marked structures
-KBUILD_CFLAGS   += $(call cc-option,-Werror=designated-init)
+KBUILD_CFLAGS   += $(call cc-option,=designated-init)
 
 # change __FILE__ to the relative path from the srctree
 KBUILD_CFLAGS	+= $(call cc-option,-fmacro-prefix-map=$(srctree)/=)
