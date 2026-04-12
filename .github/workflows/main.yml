@@ -1,4 +1,4 @@
-name: Build
+name: Build Kernel
 
 on:
   workflow_dispatch:
@@ -10,27 +10,27 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install dependencies
+      - name: Install deps
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            bc bison build-essential flex git \
-            libssl-dev libncurses-dev \
-            zstd clang lld llvm \
-            python3 ccache \
-            gcc-aarch64-linux-gnu gcc-arm-linux-gnueabi gcc-arm-linux-gnueabihf
+            bc bison flex make git \
+            libssl-dev libelf-dev \
+            clang llvm lld \
+            gcc-aarch64-linux-gnu \
+            gcc-arm-linux-gnueabi \
+            gcc-arm-linux-gnueabihf \
+            ccache python3
 
-      - name: Fix broken kernel config (important)
+      - name: Setup build env
         run: |
-          echo "Fixing stack protector for older clang builds..."
-          sed -i 's/CONFIG_CC_STACKPROTECTOR_STRONG=y/CONFIG_CC_STACKPROTECTOR=y/' config.G970F || true
+          export KCFLAGS="-Wno-error=implicit-function-declaration"
+          export KBUILD_CFLAGS="-Wno-error=implicit-function-declaration"
+          echo "KCFLAGS set"
 
-      - name: build
+      - name: Build
         env:
           token: ${{ secrets.TOKEN }}
-          CC: clang
-          LLVM: 1
-          LLVM_IAS: 1
         run: |
           chmod +x build.sh
           ./build.sh "${token}"
