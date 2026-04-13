@@ -102,11 +102,6 @@ git clone https://github.com/Tkpointz/sploitpay_kernel_modules.git modules
 # moving output files to flashable zip
 mv arch/arm64/boot/G970F.img AnyKernel3/
 
-mv drivers/staging/rtl8812au/88XXau.ko modules/system/lib/modules
-mv drivers/staging/rtl8814au/8814au.ko modules/system/lib/modules
-mv drivers/staging/rtl8188eus/8188eu.ko modules/system/lib/modules
-mv drivers/staging/rtl8821CU/8821cu.ko modules/system/lib/modules
-
 #mv arch/arm64/boot/dtbo-G970F.img AnyKernel3/
 
 cd AnyKernel3
