@@ -69,7 +69,10 @@ fi
 }
 
 build_image_dtbo() {
-https://raw.githubusercontent.com/osm0sis/mkbootimg/master/mkbootimg.py
+wget -O mkbootimg.py https://android.googlesource.com/platform/system/tools/mkbootimg/+/refs/heads/master/mkbootimg.py?format=TEXT
+
+base64 -d mkbootimg.py > mkbootimg_decoded.py
+mv mkbootimg_decoded.py mkbootimg.py
 
 python3 mkbootimg.py \
 --header_version=1 \
