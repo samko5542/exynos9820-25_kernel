@@ -69,9 +69,9 @@ fi
 }
 
 build_image_dtbo() {
-wget https://raw.githubusercontent.com/osm0sis/mkbootimg/master/mkbootimg
+https://raw.githubusercontent.com/osm0sis/mkbootimg/master/mkbootimg.py
 
-python3 mkbootimg \
+python3 mkbootimg.py \
 --header_version=1 \
 --os_version=11.0.0 \
 --os_patch_level=2021-09 \
@@ -134,4 +134,3 @@ build_kernel
 build_image_dtbo
 generate_zip
 zip_post
-```
