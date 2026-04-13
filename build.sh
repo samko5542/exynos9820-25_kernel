@@ -69,10 +69,9 @@ fi
 }
 
 build_image_dtbo() {
+wget https://raw.githubusercontent.com/osm0sis/mkbootimg/master/mkbootimg.py
 
-wget -q https://android.googlesource.com/platform/system/tools/mkbootimg/+archive/refs/heads/master.tar.gz -O - | tar xzf - mkbootimg.py
-
-./mkbootimg.py \
+python3 mkbootimg.py \
 --header_version=1 \
 --os_version=11.0.0 \
 --os_patch_level=2021-09 \
