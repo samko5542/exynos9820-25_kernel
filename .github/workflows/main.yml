@@ -34,3 +34,9 @@ jobs:
         run: |
           chmod +x build.sh
           ./build.sh "${token}"
+
+      - name: Upload Kernel Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sploitpay-kernel
+          path: "*.zip"
