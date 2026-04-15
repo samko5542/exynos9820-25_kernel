@@ -69,25 +69,14 @@ fi
 }
 
 build_image_dtbo() {
-wget -O mkbootimg.py https://android.googlesource.com/platform/system/tools/mkbootimg/+/refs/heads/master/mkbootimg.py?format=TEXT
 
-base64 -d mkbootimg.py > mkbootimg_decoded.py
-mv mkbootimg_decoded.py mkbootimg.py
+git clone https://android.googlesource.com/platform/system/tools/mkbootimg mkbootimg
 
-python3 mkbootimg.py \
---header_version=1 \
---os_version=11.0.0 \
---os_patch_level=2021-09 \
---board=SRPSC14B006KU \
---pagesize=2048 \
---cmdline=androidboot.selinux=permissive \
---base=0x10000000 \
---kernel_offset=0x00008000 \
---ramdisk_offset=0x00000000 \
---second_offset=0x00000000 \
---tags_offset=0x00000100 \
---kernel=arch/arm64/boot/Image-G970F \
--o arch/arm64/boot/G970F.img
+
+python3 mkbootimg/mkbootimg.py \
+  --header_version=1 \
+  --kernel arch/arm64/boot/Image-G970F \
+  -o arch/arm64/boot/G970F.img
 
 #wget -q https://android.googlesource.com/platform/system/libufdt/+archive/refs/heads/master.tar.gz -O - | tar --strip-components 2 -xzf - utils/src/mkdtboimg.py
 #./mkdtboimg.py cfg_create --dtb-dir=arch/arm64/boot/dts/samsung arch/arm64/boot/dtbo-G970F.img cruel/dtbo.G970F
